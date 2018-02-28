@@ -27,12 +27,12 @@ pipeline {
         stage('Deployment'){
             parallel {
                 stage('Deploy to Staging'){
-                    step {
+                    steps {
                         sh 'scp -i /home/ubuntu/hieutr.pem /home/ubuntu/warFile/*.war ubuntu@${tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps'
                     }
                 }
                 stage('Deploy to Production'){
-                    step {
+                    steps {
                         sh 'scp -i /home/ubuntu/hieutr.pem /home/ubuntu/warFile/*.war ubuntu@${tomcat_prd}:~/apache-tomcat-8.5.28-stagg/webapps'
                     }
                 }
