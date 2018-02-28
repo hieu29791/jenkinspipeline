@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Archiving...'
-                    archiveArtifats artifacts: '/home/ubuntu/warFile/*.war'
+                    archiveArtifacts artifacts: '/home/ubuntu/warFile/*.war'
                 }
             }
         }
