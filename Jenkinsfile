@@ -2,8 +2,8 @@ pipeline {
     agent any
     
     parameters {
-        string(name: 'tomcat_dev', defaultValue: '35.176.168.64:8090', description: 'Staging Server')
-        string(name: 'tomcat_prd', defaultValue: '35.176.168.64:9090', description: 'Production Server')
+        string(name: 'tomcat_dev', defaultValue: '35.176.168.64', description: 'Staging Server')
+        string(name: 'tomcat_prd', defaultValue: '35.176.168.64', description: 'Production Server')
     }
 
     triggers {
@@ -28,12 +28,12 @@ pipeline {
             parallel {
                 stage('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/ubuntu/hieutr.pem **/*.war ubuntu@35.176.168.64:~/apache-tomcat-8.5.28-stagg/webapps"
+                        sh "scp -i /home/ubuntu/hieutr.pem **/*.war ubuntu@${params.tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps"
                     }
                 }
                 stage('Deploy to Production'){
                     steps {
-                        sh "scp -i /home/ubuntu/hieutr.pem **/*.war ubuntu@35.176.168.64:~/apache-tomcat-8.5.28-prd/webapps"
+                        sh "scp -i /home/ubuntu/hieutr.pem **/*.war ubuntu@${params.tomcat_prd}:~/apache-tomcat-8.5.28-prd/webapps"
                     }
                 }
             }
