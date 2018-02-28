@@ -19,7 +19,7 @@ pipeline {
             post {
                 success {
                     echo 'Archiving...'
-                    archiveArtifacts artifacts: '/home/ubuntu/warFile/*.war'
+                    archiveArtifacts artifacts: '**/target/*.war'
                 }
             }
         }
@@ -28,12 +28,12 @@ pipeline {
             parallel {
                 stage('Deploy to Staging'){
                     steps {
-                        sh 'scp -i /home/ubuntu/hieutr.pem /home/ubuntu/warFile/*.war ubuntu@${tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps'
+                        sh 'scp -i /home/ubuntu/hieutr.pem **/target/*.war ubuntu@${tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps'
                     }
                 }
                 stage('Deploy to Production'){
                     steps {
-                        sh 'scp -i /home/ubuntu/hieutr.pem /home/ubuntu/warFile/*.war ubuntu@${tomcat_prd}:~/apache-tomcat-8.5.28-stagg/webapps'
+                        sh 'scp -i /home/ubuntu/hieutr.pem **/target/*.war ubuntu@${tomcat_prd}:~/apache-tomcat-8.5.28-stagg/webapps'
                     }
                 }
             }
