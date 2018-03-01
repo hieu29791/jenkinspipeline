@@ -28,12 +28,12 @@ pipeline {
             parallel {
                 stage('Deploy to Staging'){
                     steps {
-                        sh "scp -i /home/ubuntu/hieutr.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps"
+                        sh "scp -i /var/lib/jenkins/hieutr.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.tomcat_dev}:~/apache-tomcat-8.5.28-stagg/webapps"
                     }
                 }
                 stage('Deploy to Production'){
                     steps {
-                        sh "scp -i /home/ubuntu/hieutr.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.tomcat_prd}:~/apache-tomcat-8.5.28-prd/webapps"
+                        sh "scp -i /var/lib/jenkins/hieutr.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.tomcat_prd}:~/apache-tomcat-8.5.28-prd/webapps"
                     }
                 }
             }
