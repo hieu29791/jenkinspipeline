@@ -1,13 +1,9 @@
 language: java
 jdk:
    - oraclejdk8
-deploy:
-   provider: s3
-   secret_access_key: $ARTIFACTS_SECRET
-   access_key_id: $ARTIFACTS_KEY
-   bucket: $ARTIFACTS_BUCKET
-   skip_cleanup: true
-   cache_control: "max-age=21600"
+addons:
+   artifacts:
+      path: '**/target/*.war'
 before_script:
    - sudo apt-get update
    - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
