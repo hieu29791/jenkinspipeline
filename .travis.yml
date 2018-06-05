@@ -2,8 +2,12 @@ language: java
 jdk:
    - oraclejdk8
 env:
-   - FOO=foo BAR=bar
-   - FOO=bar BAR=foo
+   global:
+      - FOO=foo BAR=bar
+      - FOO=bar BAR=foo
+   matrix:
+      - USE_NETWORK=true
+      - USE_NETWORK=false
 deploy:
    provider: s3
    secret_access_key: $ARTIFACTS_SECRET
