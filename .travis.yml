@@ -1,6 +1,6 @@
 language: java
 jdk:
-   oraclejdk8
+   - oraclejdk8
 deploy:
    provider: s3
    secret_access_key: $AWS_SECRET_ACCESS_KEY
@@ -10,7 +10,7 @@ deploy:
    local_dir: build
    cache_control: "max-age=21600"
 before_script:
-   sudo apt-get update
-   mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
+   - sudo apt-get update
+   - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 script:
-   mvn --version
+   - mvn --version
