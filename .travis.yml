@@ -5,17 +5,19 @@ env:
    global:
       - FOO=foo BAR=bar
       - FOO=bar BAR=foo
-   matrix:
+  matrix:
       - USE_NETWORK=true
-      - USE_NETWORK=false
+      exclude:
+         - USE_NETWORK=false
+         - secure: T2hAMiqVSaZ9zP2SzLIKFHNHyvAZdot0QCXAbwAf81l5U44+JsrTRXTjPde7g4UOk7INq9fer3Y2DB7Hv6GAuKWG57WLYDid1/rhP+CLdvHA4+gBgKrFBpXCXUhHSMbrqtpDCQpxhAIFCc1syAPQ92ZRuRba5AhfysSzosUI55DUNwPElaUI1DHD/IthsV2VXmpl59k/dfO8Vos32wE2sZqhbDekUurQ9JA2NEinsQFpfKl1YDMSQZBbkhRJUPnCsWQr7a3ro5EbLPSJUFMOSdEYHx8AIl2PIBG5fkZi20GEShu+gpCiFf2R8t3NcWdZ8RDZZ3hCOTVNPjcSNrtSi2gBl9H3AO7/hFyjiAiR+7+HiMKWUA21Yiul/bTbmGVJDpYVsdVSr+4/SJNHo3Ci6v2ZpH4O32Rpd65DonakZQk9IYertdc8/cy0E4Y3bqQ2fZrL3a65f1PwcgNcs4AQ/m2RpTxg+8UY58CIcwHWroI/8KkZW76W7CuH2fNvDqXORXlR9zXOlH5ZiNQpsB+7llEzXOYx6iwfOazQmep3qdyYsU5y9bFViLN+yclG0fvB3YstxsAhp7UcjMrOqH9HcWJnfw7oyKmopbY+p81Cj6GepBLHoVGFqR5W8fA1ZDBIEm4HvgmyszkoUpy5NbhYOotbdFNzDAvRdVYtBA95RYs=
 deploy:
    provider: s3
-   secret_access_key: $ARTIFACTS_SECRET
-   access_key_id: $ARTIFACTS_KEY
-   bucket: $ARTIFACTS_BUCKET
+   secret_access_key: "$ARTIFACTS_SECRET"
+   access_key_id: "$ARTIFACTS_KEY"
+   bucket: "$ARTIFACTS_BUCKET"
    skip_cleanup: true
-   cache_control: "max-age=21600"
-   file: '**/target/*.war'
+   cache_control: max-age=21600
+   file: "**/target/*.war"
 before_script:
    - sudo apt-get update
    - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
