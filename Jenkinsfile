@@ -38,7 +38,7 @@ pipeline {
                 }
                 stage('Deploy to Production'){
                     steps {
-                        sh "echo 'Deploy to Production''"
+                        sh "echo 'Deploy to Production'"
                         //sh "scp -i /var/lib/jenkins/hieutr.pem -o StrictHostKeyChecking=no **/target/*.war ubuntu@${params.tomcat_prd}:~/apache-tomcat-8.5.28-prd/webapps"
                     }
                 }
