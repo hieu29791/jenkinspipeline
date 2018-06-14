@@ -1,2 +1,1 @@
-Hello Bitch
-Mai moi duoc 
+New life!!!
