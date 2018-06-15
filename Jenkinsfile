@@ -14,8 +14,8 @@ pipeline {
         pollSCM('* * * * *')
     }
 
-
     stages {
+        
         stage('Install') {
             steps {
                 sh "mvn -U clean test cobertura:cobertura -Dcobertura.report.format=xml"
@@ -26,6 +26,21 @@ pipeline {
                 }
             }
         }
+
+        /*stage('Build'){
+            steps {
+                sh 'mvn clean package'
+            }
+            post {
+                always {
+                    junit '**/target/*-reports/TEST-*.xml'
+                }
+                success {
+                    echo 'Archiving...'
+                    archiveArtifacts artifacts: '**/target/*.war'
+                }
+            }
+        }*/
 
         stage('Deployment'){
             parallel {
@@ -44,24 +59,4 @@ pipeline {
             }
         }
     }
-    
-    /*stages {
-        
-        stage('Build'){
-            steps {
-                sh 'mvn clean package'
-            }
-            post {
-                always {
-                    junit '**/target/*-reports/TEST-*.xml'
-                }
-                success {
-                    echo 'Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
-            }
-        } */
-
-        
-    
 }
