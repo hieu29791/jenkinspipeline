@@ -27,20 +27,18 @@ pipeline {
             }
         }
 
-        /*stage('Build'){
-            steps {
-                sh 'mvn clean package'
-            }
-            post {
-                always {
-                    junit '**/target/*-reports/TEST-*.xml'
-                }
-                success {
-                    echo 'Archiving...'
-                    archiveArtifacts artifacts: '**/target/*.war'
-                }
-            }
-        }*/
+        //stage('Build'){
+        //    steps {
+        //        sh 'mvn clean package'
+        //    }
+        //    post {
+                
+        //        success {
+        //            echo 'Archiving...'
+        //            archiveArtifacts artifacts: '**/target/*.war'
+        //        }
+        //    }
+        //}
 
         stage('Deployment'){
             parallel {
